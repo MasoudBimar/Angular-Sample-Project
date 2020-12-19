@@ -1,42 +1,55 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    currentUser = null;
+    private currentUserSubject: BehaviorSubject<any>;
+    public currentUser: Observable<any>;
 
     /**
      *
      */
     constructor(private http: HttpClient) {
-
+        this.currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    login(credentials) {
-        return this.http.post('/api/autheticate', credentials).subscribe((result: any) => {
-            if (true) { // successfully login
-                localStorage.setItem('token', result.token);
-                // this.currentUser = ;  set Current User
-            } else {
-                return null;
-            }
-        });
+    public get currentUserValue(): User {
+        return this.currentUserSubject.value;
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        this.currentUser = null;
+    login(credentials): Observable<User> {
+        return this.http.post(environment.loginUrl + 'users/authenticate', credentials).pipe(
+            map((user: User) => {
+                // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+                user.authdata = window.btoa(credentials.userName + ':' + credentials.password);
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
     }
 
-    isLoggedIn(){
-        // if logged in 
-        return true;
-        // else
-        // return false;
+    logout(): void {
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
+    }
+
+    isLoggedIn(): boolean {
+        if (this.currentUserSubject.value) {
+            return true;
+        }
+        return false;
+    }
+
+    isAdmin(): boolean {
+        return this.currentUserValue.isAdmin;
     }
 
 }

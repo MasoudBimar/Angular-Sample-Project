@@ -2,17 +2,31 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { PublicLayoutModule } from './public-layout/public-layout.module';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PublicLayoutComponent } from './public-layout/public-layout.component';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+export const PUBLIC_ROUTES: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login',  component: LoginComponent},
+  { path: 'no-access',  component: NoAccessComponent},
+  { path: 'not-found',  component: NotFoundComponent},
+  { path: 'register',  component: RegisterComponent},
+  { path: '**', component: LoginComponent  }
+
+];
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, NoAccessComponent, NotFoundComponent],
+  declarations: [LoginComponent, RegisterComponent, NoAccessComponent, NotFoundComponent, PublicLayoutComponent],
   imports: [
     CommonModule,
-    PublicLayoutModule
-  ]
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [PublicLayoutComponent]
 })
 export class PublicModule { }

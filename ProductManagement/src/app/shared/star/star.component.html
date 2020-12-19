@@ -1,1 +1,9 @@
-<p>star works!</p>
+<div class="crop" [style.width.px]="starWidth" [title]="rating" >
+    <div style="width: 75px">
+        <span class="fa " [ngClass]="(rating >= 1)?'fa-star': 'fa-star-o'"  (click)="onClick(1)"></span>
+        <span class="fa " [ngClass]="(rating >= 2)?'fa-star': 'fa-star-o'"  (click)="onClick(2)"></span>
+        <span class="fa " [ngClass]="(rating >= 3)?'fa-star': 'fa-star-o'"  (click)="onClick(3)"></span>
+        <span class="fa " [ngClass]="(rating >= 4)?'fa-star': 'fa-star-o'"  (click)="onClick(4)"></span>
+        <span class="fa " [ngClass]="(rating >= 5)?'fa-star': 'fa-star-o'"  (click)="onClick(5)"></span>
+      </div>
+</div>

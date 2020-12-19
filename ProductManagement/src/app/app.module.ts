@@ -5,6 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { fakeBackendProvider } from './helper/fakeBackendProvider';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { PublicModule } from './modules/public/public.module';
+import { MainModule } from './modules/main/main.module';
+import { AdminModule } from './modules/main/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -14,9 +20,16 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    PublicModule,
+    MainModule,
+    AdminModule
   ],
-  providers: [],
+  providers: [
+    TokenInterceptor,
+    fakeBackendProvider,
+    ErrorInterceptor,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

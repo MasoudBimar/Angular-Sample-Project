@@ -3,18 +3,23 @@
         <div class="col-md-6 m-auto">
             <div class="card">
                 <div class="card-header">
-                    <h2 class=""></h2>
+                    <h2 class="">Login Form</h2>
                 </div>
                 <div class="card-body">
-                    <form >
-                            <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password</div>
+                    <form [formGroup]="loginForm" >
+                            <div *ngIf="this.loginForm.touched && this.loginForm.invalid" class="alert alert-danger">Invalid username and/or password</div>
                             <div class="form-group">
-                                <label for="username"></label>
-                                <input type="eamil" >
+                                <label for="userName"  >Mail Address: </label>
+                                <input type="eamil" placeholder="enter your mail address"  class="form-control" name="userName" formControlName="userName">
                             </div>
+                            <br/>
                             <div class="form-group">
-                                <label for="password"></label>
-                                <input type="password" placeholder="" >
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="enter your password" class="form-control" name="password" formControlName="password">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button"  class="form-control btn btn-primary" (click)="onSubmit()"> Login </button>
                             </div>
                     </form>
                 </div>

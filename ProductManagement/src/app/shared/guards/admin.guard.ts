@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGurad implements CanActivate {
+export class AdminGurad implements CanActivate {
 
     /**
      *
@@ -17,10 +17,10 @@ export class AuthGurad implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
         : boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if (this.authService.isLoggedIn()) {
+        if (this.authService.isAdmin()) {
             return true;
         } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/home']);
             return false;
         }
     }
