@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './modules/public/home/home.component';
 import { AdminLayoutComponent } from './modules/main/admin/admin-layout/admin-layout.component';
 import { ADMIN_ROUTES } from './modules/main/admin/admin.module';
 import { LayoutComponent } from './modules/main/main-layout/layout.component';
@@ -18,7 +18,7 @@ const APP_ROUTES: Routes = [
   { path: 'admin', component: AdminLayoutComponent, children: ADMIN_ROUTES, canActivate: [AdminGurad] },
   { path: 'main', component: LayoutComponent, children: MAIN_ROUTES },
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGurad] },
+  
   // { path: 'login', component: LoginComponent },
 
   { path: '**', component: NotFoundComponent }

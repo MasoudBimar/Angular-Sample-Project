@@ -20,7 +20,7 @@ export class AuthGurad implements CanActivate {
         if (this.authService.isLoggedIn()) {
             return true;
         } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/public/login']);
             return false;
         }
     }

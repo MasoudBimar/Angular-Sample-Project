@@ -1,21 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
 import { fakeBackendProvider } from './helper/fakeBackendProvider';
-import { TokenInterceptor } from './shared/interceptors/token.interceptor';
-import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
-import { PublicModule } from './modules/public/public.module';
-import { MainModule } from './modules/main/main.module';
 import { AdminModule } from './modules/main/admin/admin.module';
+import { MainModule } from './modules/main/main.module';
+import { PublicModule } from './modules/public/public.module';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -39,12 +39,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
 
         function authenticate(): Observable<HttpResponse<any>> {
-            const { username, password } = body;
-            const user = users.find(x => x.username === username && x.password === password);
+            const { userName, password } = body;
+            const user = users.find(x => x.userName === userName && x.password === password);
             if (!user) { return error('Username or password is incorrect'); }
             return ok({
                 id: user.id,
-                username: user.username,
+                username: user.userName,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'

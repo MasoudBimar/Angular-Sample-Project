@@ -7,13 +7,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 export const PUBLIC_ROUTES: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login',  component: LoginComponent},
   { path: 'no-access',  component: NoAccessComponent},
   { path: 'not-found',  component: NotFoundComponent},
   { path: 'register',  component: RegisterComponent},
+  { path: 'home',  component: HomeComponent},
   { path: '**', component: LoginComponent  }
 
 ];
