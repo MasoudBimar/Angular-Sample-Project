@@ -29,9 +29,16 @@ export class AuthService {
         return this.http.post(environment.loginUrl + 'users/authenticate', credentials).pipe(
             map((user: User) => {
                 // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-                user.authdata = window.btoa(credentials.userName + ':' + credentials.password);
+                // user.authData = window.btoa(credentials.userName + ':' + credentials.password);
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
+    register(credentials): Observable<User> {
+        return this.http.post(environment.loginUrl + 'users/register', credentials).pipe(
+            map((user: User) => {
                 return user;
             }));
     }
@@ -39,6 +46,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        
     }
 
     isLoggedIn(): boolean {

@@ -1,27 +1,27 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products/products.component';
-import { MainLayoutModule } from './main-layout/main-layout.module';
-import { AdminModule } from './admin/admin.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGurad } from 'src/app/shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MainLayoutModule } from './main-layout/main-layout.module';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductsModule } from './products/products.module';
 
 export const MAIN_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGurad]},
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGurad] },
+  { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'products', component: ProductListComponent, canActivate: [AuthGuard] },
   // { path: '**', component: NotFoundComponent  }
 
 ];
 
 @NgModule({
-  declarations: [ProductsComponent, DashboardComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     MainLayoutModule,
-    AdminModule,
-    RouterModule
+    RouterModule,
+    ProductsModule
   ]
 })
 export class MainModule { }

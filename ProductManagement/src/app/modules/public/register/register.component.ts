@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/internal/operators/first';
+import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -42,7 +42,12 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authService.login({ userName: this.frm.userName.value, password: this.frm.password.value })
+    this.authService.register({ 
+                                  userName: this.frm.userName.value,
+                                  firstName: this.frm.userName.value,
+                                  lastName: this.frm.userName.value,
+                                  password: this.frm.password.value
+                            })
       .pipe(first())
       .subscribe(
         data => {

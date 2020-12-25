@@ -4,6 +4,6 @@ export class User {
     password: string;
     firstName: string;
     lastName: string;
-    authdata?: string;
+    authData?: string;
     isAdmin?: boolean;
 }

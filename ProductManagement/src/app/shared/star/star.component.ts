@@ -21,7 +21,7 @@ export class StarComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  onClick(val: number) {
+  onClick(val: number): void {
     this.rating = val;
     this.rateChanged.emit(this.rating);
   }
