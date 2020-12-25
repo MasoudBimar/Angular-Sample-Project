@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    // get return url from route parameters or default to '/'
-    // this.returnUrl = this.route.snapshot.queryParams.get('returnUrl');
+
   }
 
   // convenience getter for easy access to form fields
@@ -53,10 +52,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login({ userName: this.frm.userName.value, password: this.frm.password.value })
       .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['/main/dashboard']);
-        },
+      .subscribe(data => {
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([this.returnUrl || '/main/dashboard']);
+      },
         error => {
           this.error = error;
           console.warn(this.error);
